@@ -10,3 +10,11 @@ class LoginPageLocators():
     REGISTRATION_EMAIL = (By.CSS_SELECTOR, "#id_registration-email")
     REGISTRATION_PASSWORD1 = (By.CSS_SELECTOR, "#id_registration-password1")
     REGISTRATION_PASSWORD2 = (By.CSS_SELECTOR, "#id_registration-password2")
+
+class ObjectPageLocators():
+    BASKET_BUTTON = (By.CSS_SELECTOR, ".btn-add-to-basket")
+    OBJECT_NAME = (By.CSS_SELECTOR, ".alertinner strong")
+    OBJECT_PRICE_IN_BASKET = (By.CSS_SELECTOR, ".alertinner p strong")
+    OBJECT_TITLE = (By.CSS_SELECTOR, ".product_main h1")
+    OBJECT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages>.alert-success:nth-child(1)")
