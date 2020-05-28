@@ -1,5 +1,6 @@
 from .pages.product_page import PageObject
 from .pages.basket_page import PageBasket
+from .pages.login_page import LoginPage
 import time
 import pytest
 
@@ -53,6 +54,31 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     page.go_to_basket()
     page.should_be_message_about_empty_basket()
     page.should_be_empty_basket()
+
+@pytest.mark.registration
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
+        page = LoginPage(browser, link) 
+        page.open()
+        email = str(time.time()) + "@fakemail.org"
+        page.register_new_user(email, "1234567899jdfdhfdhfsdhfsj")
+        page.should_be_authorized_user() 
+        
+    def test_user_cant_see_success_message(self, browser): 
+        link = "http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"
+        page = PageObject(browser, link) 
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"
+        page = PageObject(browser, link) 
+        page.open()
+        page.add_to_basket_without_alert()
+        page.should_be_object_in_basket()
+        page.should_be_right_price()
     
  
 
